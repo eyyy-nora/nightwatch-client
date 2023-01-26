@@ -1,0 +1,81 @@
+{
+  "name": "nightwatch",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "electron-esbuild dev",
+    "build": "electron-esbuild build",
+    "package": "electron-builder"
+  },
+  "devDependencies": {
+    "@fukumong/fantasticon": "^2.1.0",
+    "@types/node": "16.x",
+    "@types/react": "18.x",
+    "@types/react-dom": "18.x",
+    "@typescript-eslint/eslint-plugin": "^5.49.0",
+    "@typescript-eslint/parser": "^5.49.0",
+    "@vitejs/plugin-react": "3.x",
+    "autoprefixer": "^10.4.13",
+    "electron": "22.x",
+    "electron-builder": "23.x",
+    "electron-esbuild": "^7.0.0",
+    "electron-util": "0.17.x",
+    "esbuild": "^0.16.x",
+    "esbuild-plugin-eslint": "^0.1.1",
+    "eslint": "^8.32.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "postcss-import": "^15.1.0",
+    "prettier": "^2.8.3",
+    "react": "18.x",
+    "react-dom": "18.x",
+    "tailwindcss": "^3.2.4",
+    "typescript": "^4.9.x",
+    "vite": "4.x",
+    "vite-plugin-fantasticon": "^1.4.0",
+    "vite-tsconfig-paths": "^4.0.5"
+  },
+  "dependencies": {
+    "axios": "^1.2.4"
+  },
+  "build": {
+    "appId": "me.reichwald.nora.nightwatch",
+    "productName": "nightwatch",
+    "extraMetadata": {
+      "name": "nightwatch",
+      "main": "main.js"
+    },
+    "files": [
+      {
+        "from": ".",
+        "filter": [
+          "package.json"
+        ]
+      },
+      {
+        "from": "dist/main"
+      },
+      {
+        "from": "dist/renderer"
+      }
+    ],
+    "win": {
+      "target": [
+        "zip"
+      ]
+    },
+    "mac": {
+      "target": [
+        "zip"
+      ]
+    },
+    "linux": {
+      "target": [
+        "zip"
+      ]
+    },
+    "directories": {
+      "buildResources": "resources"
+    },
+    "publish": null
+  }
+}
