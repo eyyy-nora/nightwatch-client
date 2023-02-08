@@ -1,0 +1,91 @@
+.label, .button {
+  @apply h-12 block flex items-center relative;
+  transition: background-color .1s ease-out;
+}
+
+.button {
+  @apply w-12 block flex items-center justify-center;
+}
+
+.button:after {
+  @apply block absolute w-full h-full border-0 border-slate-600;
+  transition: border .1s ease-out;
+  content: " ";
+}
+
+.label {
+  @apply px-3;
+}
+
+.buttons, .labels {
+  @apply flex flex-col items-stretch relative h-full;
+}
+
+.labels {
+  @apply bg-slate-700 2xl:w-96 xl:w-80 w-64 border-l-2 border-slate-700;
+}
+
+.buttons {
+  @apply bg-slate-900;
+}
+
+.bottom>.buttons {
+  @apply flex-row justify-center;
+}
+
+.active.label {
+  @apply bg-slate-600 bg-opacity-50;
+}
+
+.active.button {
+  @apply bg-slate-800;
+}
+.menu:not(.bottom) .active.button:after {
+  @apply border-r-4 border-blue-300;
+}
+.menu.bottom .active.button:after {
+  @apply border-t-4 border-blue-300;
+}
+.menu {
+  @apply text-slate-100 select-none;
+}
+
+.link {
+  @apply text-blue-300 font-bold no-underline hover:text-blue-100;
+}
+
+.icon {
+  @apply px-4;
+}
+
+/* .menu {
+  @apply flex-col items-stretch bg-slate-700 relative h-full;
+  pointer-events: none;
+}
+
+.sidebar {
+  @apply absolute top-0 bottom-0 left-0 pl-6 pr-7 shadow-lg bg-slate-600 bg-opacity-25 border-r border-slate-800;
+}
+
+.item {
+  @apply h-12 flex flex-row items-center text-blue-300 font-bold no-underline hover:text-blue-100 relative;
+}
+
+.label {
+  @apply pl-6 w-full h-full flex items-center;
+}
+
+.icon {
+  @apply px-4 static;
+}
+
+.active {
+
+}
+
+
+.active:after {
+  @apply block absolute left-12 top-0 bottom-0 w-1 bg-blue-300 shadow;
+  content: " ";
+}
+*/

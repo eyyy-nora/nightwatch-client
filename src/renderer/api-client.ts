@@ -1,17 +1,6 @@
 import axios, { type AxiosInstance, type AxiosRequestConfig, AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
 
-export function useShelters() {
-  const { busy, data, config, setConfig, response } = useApi({
-    config: {
-      url: "https://api.hamburg.de/datasets/v1/uebernachtungsangebote/collections/uebernachtungsangebote/items",
-      method: "get",
-      params: { f: "json", limit: 10, offset: 0 },
-    },
-  });
-  return { busy, data, config, setConfig, response };
-}
-
 export interface ApiHookOptions {
   client?: AxiosInstance;
   config?: AxiosRequestConfig;

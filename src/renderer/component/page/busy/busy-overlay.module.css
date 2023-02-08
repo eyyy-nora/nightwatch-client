@@ -1,0 +1,15 @@
+.busyOverlay {
+  @apply w-full h-full;
+}
+
+.busyOverlayContent {
+  @apply w-full h-full flex items-center justify-center opacity-0 z-10 absolute top-0 left-0 bottom-0 right-0 bg-slate-800;
+  transition: opacity .5s linear;
+  pointer-events: none;
+}
+
+.busyOverlayContent.busy {
+  @apply opacity-100;
+  pointer-events: all;
+}
+

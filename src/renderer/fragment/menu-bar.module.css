@@ -1,0 +1,12 @@
+
+.hamburger, .hamburger[type='button'] {
+  @apply w-12 h-12 bg-slate-900 text-gray-100 border-none outline-none rounded-none;
+}
+
+.header {
+  @apply h-12 flex flex-row items-center justify-between bg-slate-800 text-gray-100 shadow-lg;
+}
+
+.avatar {
+  @apply w-10 h-10 rounded-full;
+}

@@ -8,6 +8,7 @@ const { devDependencies } = JSON.parse(readFileSync("./package.json", "utf-8"));
 const config: BuildOptions = {
   platform: "node",
   entryPoints: [resolve("src/main/main.ts"), resolve("src/main/preload.ts")],
+  outdir: resolve("dist/client"),
   plugins: [eslint()],
   bundle: true,
   target: "node16.15.0", // electron version target

@@ -1,0 +1,61 @@
+.container {
+  @apply h-full w-full relative overflow-hidden;
+}
+
+.container.static {
+  @apply flex;
+}
+
+.container.static.top {
+  @apply flex-col;
+}
+
+.container.static.bottom {
+  @apply flex-col-reverse;
+}
+
+.container.static.left {
+  @apply flex-row;
+}
+
+.container.static.right {
+  @apply flex-row-reverse;
+}
+
+.drawer {
+  @apply absolute overflow-auto z-10 shadow-lg;
+  transition: transform .25s ease-out;
+}
+
+.drawer.static {
+  @apply relative;
+  transition: none;
+}
+
+.drawer:not(.static).left {
+  @apply left-0 top-0 bottom-0;
+  transform: translateX(-100%);
+}
+
+.drawer:not(.static).right {
+  @apply right-0 top-0 bottom-0;
+  transform: translateX(100%);
+}
+
+.drawer:not(.static).top {
+  @apply top-0 left-0 right-0;
+  transform: translateY(-100%);
+}
+
+.drawer:not(.static).bottom {
+  @apply bottom-0 left-0 right-0;
+  transform: translateY(100%);
+}
+
+.drawer:not(.static).open {
+  transform: none;
+}
+
+.body {
+  @apply flex-1 w-full h-full relative overflow-auto;
+}

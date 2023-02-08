@@ -76,3 +76,7 @@ body {
 .highlight {
   @apply underline;
 }
+
+#root {
+  @apply h-screen w-screen absolute overflow-hidden;
+}

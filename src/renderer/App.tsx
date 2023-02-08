@@ -1,32 +1,47 @@
-import React, { useEffect, useState } from "react";
-import { useShelters } from "src/renderer/api-client";
-import { Icon } from "src/renderer/component/typography/icon";
+import axios from "axios";
+import React, { useMemo } from "react";
+import { ResponsiveProvider } from "src/renderer/context/tailwind-context";
+import { MenuBar, MenuBarEntry } from "src/renderer/fragment/menu-bar";
+import { StreetMapView } from "src/renderer/view/street-map-view";
+
+Object.assign(window, { axios });
 
 export function App() {
-  const [count, setCount] = useState(0);
-  const { data: shelters, busy } = useShelters();
+  const entries = useMemo<MenuBarEntry[]>(() => {
+    return [
+      {
+        icon: "geo-alt",
+        label: "Karte",
+        key: "map",
+        content: () => <StreetMapView />,
+      },
+      {
+        icon: "search",
+        label: "Suche",
+        key: "search",
+      },
+      {
+        icon: "envelope",
+        label: "Benachrichtigungen",
+        key: "notifications",
+        content: () => {
+          const discordOauthUrl = `${
+            import.meta.env.VITE_API_URL
+          }/api/auth/discord/authorize?referer=${encodeURIComponent(window.location.href)}`;
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCount(c => c + 1);
-    }, 1000);
-
-    return () => clearInterval(timer);
+          return (
+            <button type="button" onClick={() => (window.location.href = discordOauthUrl)}>
+              Login with Discord!
+            </button>
+          );
+        },
+      },
+    ];
   }, []);
 
   return (
-    <div className="bg-rose-200">
-      <h1>Count {count}</h1>
-      <Icon icon="gear" />
-      <div>Hello world!</div>
-      <div className="container">Fast refresh active</div>
-      {busy ? (
-        <div>Loading...</div>
-      ) : (
-        <pre>
-          <code>{JSON.stringify(shelters, null, 2)}</code>
-        </pre>
-      )}
-    </div>
+    <ResponsiveProvider>
+      <MenuBar entries={entries} />
+    </ResponsiveProvider>
   );
 }

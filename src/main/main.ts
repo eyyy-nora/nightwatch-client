@@ -1,5 +1,5 @@
 import * as path from "path";
-import { app, BrowserWindow } from "electron";
+import { app, BrowserWindow, protocol } from "electron";
 import { is } from "electron-util";
 import { jsonStore } from "src/main/json-store";
 
@@ -42,12 +42,7 @@ async function createWindow() {
     // this is the default port electron-esbuild is using
     win.loadURL("http://localhost:9080");
   } else {
-    win.loadURL(
-      new URL({
-        pathname: path.join(__dirname, "index.html"),
-        protocol: "file",
-      } as URL).toString(),
-    );
+    win.loadURL("app://index.html");
   }
 
   win.on("closed", () => {
@@ -69,7 +64,16 @@ async function createWindow() {
   win.on("moved", persistWindowPosition);
 }
 
-app.on("ready", createWindow);
+app.on("ready", async () => {
+  protocol.registerFileProtocol("app", (request, callback) => {
+    const url = request.url.slice(6);
+    callback({
+      path: path.normalize(`${__dirname}/${url}`),
+    });
+  });
+
+  await createWindow();
+});
 
 app.on("window-all-closed", () => {
   if (!is.macos) app.quit();
@@ -78,3 +82,13 @@ app.on("window-all-closed", () => {
 app.on("activate", () => {
   if (win === null && app.isReady()) createWindow();
 });
+
+protocol.registerSchemesAsPrivileged([
+  {
+    scheme: "app",
+    privileges: {
+      standard: true,
+      secure: true,
+    },
+  },
+]);
